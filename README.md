@@ -35,7 +35,7 @@ Then, in your controller, you can add any value to the dynamic NGon property of 
         }
     }
 
-In your javascript, you then add this (you'll likely want to put this in your layout/master page file):
+In your HTML, you then add this (you'll likely want to put this in your layout/master page file):
 
     @Html.IncludeNGon()
 
