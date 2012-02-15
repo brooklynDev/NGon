@@ -1,0 +1,17 @@
+﻿<h2>Home Page</h2>
+
+<script type="text/javascript">
+    $(function () {
+        $("#button").click(function () {
+            var person = ngon.Person;
+            var div = $("#output");
+            div.html('');
+            div.append("FirstName: " + person.FirstName);
+            div.append(", LastName: " + person.LastName);
+            div.append(", Age: " + person.Age);
+        });
+    });
+</script>
+
+<input type="button" value="Show person data" id="button"/>
+<div id="output"></div>
