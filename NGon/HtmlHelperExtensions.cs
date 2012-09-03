@@ -4,7 +4,7 @@ using System.Dynamic;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace NGon
 {
@@ -29,10 +29,9 @@ namespace NGon
             var builder = new StringBuilder();
             builder.AppendFormat("window.{0}={{}};", @namespace);
 
-            var serializer = new JavaScriptSerializer();
             foreach (var prop in ngon)
             {
-                builder.AppendFormat("{0}.{1}={2};", @namespace, prop.Key, helper.Raw(serializer.Serialize(prop.Value)));
+                builder.AppendFormat("{0}.{1}={2};", @namespace, prop.Key, helper.Raw(JsonConvert.SerializeObject(prop.Value)));
             }
 
             tag.InnerHtml = builder.ToString();

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>NGon</id>
+    <version>1.0.0</version>
+    <authors>Alex Friedman</authors>
+    <owners>Alex Friedman</owners>
+    <projectUrl>https://github.com/brooklynDev/NGon</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Share your ASP.Net MVC server side Controller data with your client side JavaScript.</description>
+    <releaseNotes>Updated serializer to JSON.Net</releaseNotes>
+    <copyright>Copyright 2012</copyright>
+    <tags>mvc json</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="1.0" />
+    </dependencies>
+  </metadata>
+</package>
