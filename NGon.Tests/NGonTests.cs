@@ -102,5 +102,37 @@ namespace NGon.Tests
             //assert
             Assert.Throws<InvalidOperationException>(() => _helper.IncludeNGon());
         }
+
+        [Test]
+        public void OutputScriptTagFalseOmitsScriptTag()
+        {
+            //arrange
+            _controller.ViewBag.NGon.Foo = 100;
+
+            //act
+            var result = _helper.IncludeNGon(outputScriptTag: false);
+
+            //assert
+            var expected = "window.ngon={};ngon.Foo=100;";
+            var actual = result.ToString();
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void ExternalJsFileTrueOutputsExternalJSReference()
+        {
+            //arrange
+            _controller.ViewBag.NGon.Foo = 100;
+
+            //act
+            var result = _helper.IncludeNGon(useExternalJSFile: true);
+
+            //assert
+            var expected = @"<script src=""ngon.js"" type=""text/javascript""></script>";
+            var actual = result.ToString();
+            Assert.AreEqual(expected, actual);
+        }
+
+
     }
 }

@@ -1,10 +1,14 @@
-﻿using System.Web.Mvc;
+﻿using System.Web.DynamicData;
+using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.SessionState;
 
 namespace NGon.SampleApplication
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
+
+  
 
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -16,6 +20,13 @@ namespace NGon.SampleApplication
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            
+            //routes.MapRoute(
+            //    "NGon",
+            //    "ngon",
+            //    new { controller = "DynamicNGonJavascriptController", action = "NGon", id = UrlParameter.Optional }, null,
+            //    new[] { typeof(DynamicNGonJavascriptController).Namespace });
 
             routes.MapRoute(
                 "Default", // Route name
