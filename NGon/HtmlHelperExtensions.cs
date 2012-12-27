@@ -5,25 +5,11 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.Web.SessionState;
 using Newtonsoft.Json;
 using System.Linq;
 
 namespace NGon
 {
-    public class DynamicNGonJavascriptController : Controller
-    {
-        public DynamicNGonJavascriptController()
-        {
-        }
-
-        public ActionResult NGon(string data)
-        {
-            return JavaScript(data);
-        }
-    }
-
-
     public static class HtmlHelperExtensions
     {
         private const string ExternalJSRoute = "ngon.js";
@@ -58,7 +44,6 @@ namespace NGon
 
         public static IHtmlString IncludeNGon(this HtmlHelper helper, string @namespace = "ngon", bool useExternalJSFile = false, bool outputScriptTag = true)
         {
-
             var viewData = helper.ViewContext.ViewData;
             if (viewData == null)
             {
@@ -83,7 +68,7 @@ namespace NGon
             if (useExternalJSFile)
             {
                 AddExternalJsFileRoute(helper, outputJavascript);
-                tag.Attributes.Add("src", ExternalJSRoute);
+                tag.Attributes.Add("src", ExternalJSRoute + "?r=" + DateTime.Now.Ticks);
             }
             else
             {

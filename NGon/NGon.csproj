@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DynamicNGonJavascriptController.cs" />
     <Compile Include="HtmlHelperExtensions.cs" />
     <Compile Include="NGonActionFilterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

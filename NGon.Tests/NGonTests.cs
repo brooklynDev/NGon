@@ -132,7 +132,5 @@ namespace NGon.Tests
             var actual = result.ToString();
             Assert.AreEqual(expected, actual);
         }
-
-
     }
 }
