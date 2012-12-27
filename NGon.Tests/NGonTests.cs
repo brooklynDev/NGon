@@ -128,9 +128,8 @@ namespace NGon.Tests
             var result = _helper.IncludeNGon(useExternalJSFile: true);
 
             //assert
-            var expected = @"<script src=""ngon.js"" type=""text/javascript""></script>";
-            var actual = result.ToString();
-            Assert.AreEqual(expected, actual);
+            var expected = "<script src=\"ngon.js?r=";
+            Assert.IsTrue(result.ToString().StartsWith(expected)); //because of the cache busting, can't really match exact. Need to think of a workaround....
         }
     }
 }
