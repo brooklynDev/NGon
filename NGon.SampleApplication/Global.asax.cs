@@ -21,13 +21,6 @@ namespace NGon.SampleApplication
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            
-            //routes.MapRoute(
-            //    "NGon",
-            //    "ngon",
-            //    new { controller = "DynamicNGonJavascriptController", action = "NGon", id = UrlParameter.Optional }, null,
-            //    new[] { typeof(DynamicNGonJavascriptController).Namespace });
-
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
