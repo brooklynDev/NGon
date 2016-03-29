@@ -29,20 +29,20 @@ namespace NGon
             dynamicNGonRoute.Defaults.Add("data", javascript);
         }
 
-        private static string GetOutputJavascript(HtmlHelper helper, dynamic ngon, string @namespace)
+        private static string GetOutputJavascript(HtmlHelper helper, dynamic ngon, string @namespace, Formatting formatting, params JsonConverter[] converters)
         {
             var builder = new StringBuilder();
             builder.AppendFormat("window.{0}={{}};", @namespace);
 
             foreach (var prop in ngon)
             {
-                builder.AppendFormat("{0}.{1}={2};", @namespace, prop.Key, helper.Raw(JsonConvert.SerializeObject(prop.Value)));
+                builder.AppendFormat("{0}.{1}={2};", @namespace, prop.Key, helper.Raw(JsonConvert.SerializeObject(prop.Value, formatting, converters)));
             }
 
             return builder.ToString();
         }
 
-        public static IHtmlString IncludeNGon(this HtmlHelper helper, string @namespace = "ngon", bool useExternalJSFile = false, bool outputScriptTag = true)
+        public static IHtmlString IncludeNGon(this HtmlHelper helper, string @namespace = "ngon", bool useExternalJSFile = false, bool outputScriptTag = true, Formatting formatting = Formatting.None, params JsonConverter[] converters)
         {
             var viewData = helper.ViewContext.ViewData;
             if (viewData == null)
@@ -56,7 +56,7 @@ namespace NGon
                 throw new InvalidOperationException("Cannot find NGon in ViewBag. Did you remember to add the global NGonActionFilterAttribute?");
             }
 
-            var outputJavascript = GetOutputJavascript(helper, ngon, @namespace);
+            var outputJavascript = GetOutputJavascript(helper, ngon, @namespace, formatting, converters);
             if (!outputScriptTag)
             {
                 return new HtmlString(outputJavascript);

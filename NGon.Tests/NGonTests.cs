@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Moq;
 using NUnit.Framework;
+using Newtonsoft.Json.Converters;
 
 namespace NGon.Tests
 {
@@ -72,6 +73,23 @@ namespace NGon.Tests
 
             //assert
             var expected = String.Concat(String.Format(StartScriptTagFormat, "ngon"), @"ngon.Person={""FirstName"":""John"",""LastName"":""Doe"",""Age"":45};", EndScriptTag);
+            var actual = result.ToString();
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void PocoObjectCustomizedJsonTest()
+        {
+            var person = new { FirstName = "Dollard", LastName = "Drunk", BirthDate = new DateTime(1946, 6, 14) };
+
+            //arrange
+            _controller.ViewBag.NGon.Person = person;
+
+            //act
+            var result = _helper.IncludeNGon(converters: new IsoDateTimeConverter { DateTimeFormat = "dd-MMM-yyyy" });
+
+            //assert
+            var expected = $@"{string.Format(StartScriptTagFormat, "ngon")}ngon.Person={{""FirstName"":""Dollard"",""LastName"":""Drunk"",""BirthDate"":""14-Jun-1946""}};{EndScriptTag}";
             var actual = result.ToString();
             Assert.AreEqual(expected, actual);
         }
